@@ -20,4 +20,9 @@ class AdminPageController
     {
         return view('admin.inventory');
     }
+
+    public function login()
+    {
+        return view('login');
+    }
 }

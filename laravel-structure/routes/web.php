@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', 'Admin\AdminPageController@index');
+Route::get('/', 'Admin\AdminPageController@index')->middleware('cek.login');
+Route::get('/login', 'Admin\AdminPageController@login');
+Route::post('/login', 'LoginController@login');
+
 Route::group(['prefix' => 'kelas'], function () {
     Route::get('/', 'Admin\AdminPageController@kelas');
     Route::get('/data', 'Admin\KelasController@getKelas');
