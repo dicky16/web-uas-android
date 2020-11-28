@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/tes', 'API\LoginController@get');
+Route::post('/login', 'API\LoginController@login');
+//route must have token
+Route::group(['prefix' => 'v1', 'middleware' => 'jwt.verify'], function () {
+    Route::get('/get', function () {
+        return response()->json(['data' => 'data']);
+    });
+});

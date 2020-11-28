@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', 'Admin\AdminPageController@index');
+Route::group(['prefix' => 'kelas'], function () {
+    Route::get('/', 'Admin\AdminPageController@kelas');
+    Route::get('/data', 'Admin\KelasController@getKelas');
+});
+Route::group(['prefix' => 'inventory'], function () {
+    Route::get('/', 'Admin\AdminPageController@inventory');
+    Route::get('/data', 'Admin\KelasController@getKelas');
 });
