@@ -49,7 +49,7 @@ Coded by www.creative-tim.com
           <!-- <p>CT</p> -->
         </a>
         <a href="{{url('')}}" class="simple-text logo-normal">
-          Creative Tim {{Request::url()}}
+          Creative Tim
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->
