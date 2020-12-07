@@ -27,6 +27,7 @@ Coded by www.creative-tim.com
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
   <!-- CSS Files -->
   <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('admin/css/paper-dashboard.css?v=2.0.1') }}" rel="stylesheet" />
@@ -48,7 +49,7 @@ Coded by www.creative-tim.com
           <!-- <p>CT</p> -->
         </a>
         <a href="{{url('')}}" class="simple-text logo-normal">
-          Creative Tim
+          Creative Tim {{Request::url()}}
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->
@@ -56,19 +57,31 @@ Coded by www.creative-tim.com
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="active ">
+          @if(Request::is('/'))
+          <li class="active">
+          @else
+          <li class=" ">
+          @endif
             <a href="{{url('/')}}">
               <i class="nc-icon nc-bank"></i>
               <p>Dashboard</p>
             </a>
           </li>
+          @if(Request::is('kelas'))
+          <li class="active">
+          @else
           <li>
+          @endif
             <a href="{{url('kelas')}}">
               <i class="nc-icon nc-bank"></i>
               <p>Class</p>
             </a>
           </li>
+          @if(Request::is('inventory'))
+          <li class="active">
+          @else
           <li>
+          @endif
             <a href="{{url('inventory')}}">
               <i class="nc-icon nc-briefcase-24"></i>
               <p>Inventory</p>
@@ -147,7 +160,7 @@ Coded by www.creative-tim.com
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="{{ asset('admin/js/core/jquery.min.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="{{ asset('admin/js/core/popper.min.js') }}"></script>
   <script src="{{ asset('admin/js/core/bootstrap.min.js') }}"></script>
   <script src="{{ asset('admin/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
@@ -161,9 +174,9 @@ Coded by www.creative-tim.com
   <script src="{{ asset('admin/js/paper-dashboard.min.js?v=2.0.1') }}" type="text/javascript"></script><!-- Paper Dashboard DEMO methods, don't include it in your project! -->
   <script src="{{ asset('admin/demo/demo.js') }}"></script>
   <!-- jquery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- added cdn datatable --> 
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
   <script>
     $(document).ready(function() {

@@ -21,11 +21,17 @@ Route::get('/', 'Admin\AdminPageController@index')->middleware('cek.login');
 Route::get('/login', 'Admin\AdminPageController@login');
 Route::post('/login', 'LoginController@login');
 
-Route::group(['prefix' => 'kelas'], function () {
-    Route::get('/', 'Admin\AdminPageController@kelas');
-    Route::get('/data', 'Admin\KelasController@getKelas');
-});
-Route::group(['prefix' => 'inventory'], function () {
-    Route::get('/', 'Admin\AdminPageController@inventory');
-    Route::get('/data', 'Admin\KelasController@getKelas');
+Route::group(['middleware' => 'cek.login'], function () {
+    Route::group(['prefix' => 'kelas'], function () {
+        Route::get('/', 'Admin\AdminPageController@kelas');
+        Route::get('/data', 'Admin\KelasController@getKelas');
+        Route::post('/', 'Admin\KelasController@store');
+        Route::get('/delete/{id}', 'Admin\KelasController@destroy');
+        Route::get('/edit/{id}', 'Admin\KelasController@edit');
+        Route::get('/update/{id}', 'Admin\KelasController@update');
+    });
+    Route::group(['prefix' => 'inventory'], function () {
+        Route::get('/', 'Admin\AdminPageController@inventory');
+        Route::get('/data', 'Admin\InventoryController@getInventory');
+    });
 });
