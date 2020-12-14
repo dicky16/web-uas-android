@@ -29,4 +29,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'jwt.verify'], function () {
 
     Route::get('/kelas', 'API\KelasController@getKelas');
     Route::post('/pinjam', 'API\KelasController@pinjamKelas');
+    Route::get('/pinjam', 'API\PinjamController@getPinjam');
+    Route::post('/pinjam/terima', 'API\PinjamController@terimaPinjaman');
+    Route::post('/pinjam/tolak', 'API\PinjamController@tolakPinjaman');
 });
