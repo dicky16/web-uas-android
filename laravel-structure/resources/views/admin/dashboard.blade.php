@@ -7,13 +7,13 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-globe text-warning"></i>
+                    <img src="https://img.icons8.com/bubbles/50/000000/user-male.png"/>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Users</p>
-                      <p class="card-title">150GB<p>
+                      <p class="card-title">3<p>
                     </div>
                   </div>
                 </div>
@@ -33,13 +33,13 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-money-coins text-success"></i>
+                    <img src="https://img.icons8.com/bubbles/50/000000/product.png"/>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Inventory</p>
-                      <p class="card-title">$ 1,345<p>
+                      <p class="card-title">6<p>
                     </div>
                   </div>
                 </div>
