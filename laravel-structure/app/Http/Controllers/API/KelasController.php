@@ -12,6 +12,14 @@ class KelasController
      *
      * @return \Illuminate\Http\Response
      */
+    public function getKelas()
+    {
+        $kelas = DB::table('room')->get();
+        return response()->json(
+            $kelas
+        );
+        // return response()->json(['result' => $kelas]);
+    }
     public function index()
     {
         //
@@ -87,5 +95,25 @@ class KelasController
     public function destroy($id)
     {
         //
+    }
+
+    public function pinjamKelas(Request $request)
+    {
+        $data = [
+            'mulai_pinjam' => $request->mulai ?? null,
+            'selesai_pinjam' => $request->selesai ?? null,
+            'keterangan' => $request->keterangan ?? null,
+            'status' => $request->status ?? null,
+            'user_id' => $request->user_id ?? null,
+            'kelas_id' => $request->kelas_id ?? null
+        ];
+        $save = DB::table('pinjam')->insert($data);
+        if($save) {
+            $msg = [
+                'success' => true,
+                'message' => "sukses"
+            ];
+            return response()->json([$msg]);
+        }
     }
 }

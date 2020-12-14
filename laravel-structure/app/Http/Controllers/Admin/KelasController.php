@@ -34,8 +34,15 @@ class KelasController
         ];
         $save = DB::table('room')->insert($data);
         if($save) {
-            return redirect('/kelas')->with(['store' => 'success']);
+            return response()->json([
+                'success' => "true",
+            ]); 
         }
+    }
+    public function getLastId()
+    {
+        $lastId = DB::table('room')->latest()->value('id');
+        return response()->json(['success' => 'true', 'message' => 'ok', 'data' => $lastId]);
     }
 
     public function edit($id)

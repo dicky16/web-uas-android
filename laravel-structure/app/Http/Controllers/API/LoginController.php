@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\DB;
 
 class LoginController
 {
@@ -18,8 +19,23 @@ class LoginController
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-
-        return response()->json(compact('token'));
+        $user = DB::table('users')
+        ->join('user_level', 'users.level_id', '=', 'user_level.id')
+        ->where('email', $request->email)
+        ->select('users.*', 'user_level.level')
+        ->get();
+        $msg = [
+            'success' => true,
+            'message' => 'ok',
+            'data' => [
+                'id' => $user[0]->id,
+                'name' => $user[0]->name,
+                'email' => $user[0]->email,
+                'level' => $user[0]->level,
+                'token' => $token
+            ]
+        ];
+        return response()->json([$msg]);
     }
 
     // public function logout()

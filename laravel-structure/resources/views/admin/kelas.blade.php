@@ -37,15 +37,14 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form method="POST" action="{{url('kelas')}}">
-                @csrf
+            <form">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nama Kelas</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukkan Nama Kelas" name="nama" required>
+                    <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Masukkan Nama Kelas" id="nama" required>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="submit" class="btn btn-primary" value="Submit" id="tambah-kelas">
                 </div>
             </form>
             </div>
@@ -98,6 +97,61 @@
             });
         }
 
+        //tambah firebase data sensor
+        $('body').on('click', '#tambah-kelas', function(e) {
+            e.preventDefault();
+            var formData = new FormData()
+            var nama = $("#nama").val();
+            // console.log(nama);
+            formData.append('nama', nama);
+                $.ajax({
+                    type: 'GET',
+                    url: '/kelas/tambah',
+                    data: {nama:nama}, 
+                    success: function(data) {
+                        if(data.success == "true") {
+                            Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Berhasil tambah kelas!',
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
+                        $.ajax({
+                            type: 'GET',
+                            url: '/kelas/id',
+                            success: function(data) {
+                                addSensor(data.data)
+                            }
+                        });
+                        setTimeout(reload, 3000);
+                        }
+                    }
+                });
+        });
+
+        function reload() {
+            location.reload();
+        }
+        //fungi firebase
+        function addSensor(id)
+        {
+            var sensorRef = firebase.database();
+            var sensor = sensorRef.ref("kelas/" + id);
+            sensor.set({
+            id : parseInt(id),
+            lampu : 'off'
+            });
+        }
+
+        function deleteSensor(id)
+        {
+            var sensorRef = firebase.database();
+            var sensor = sensorRef.ref("kelas/" + id);
+            sensor.remove();
+
+        }
+
         $('body').on('click', '.btn-delete-kelas', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
@@ -114,13 +168,14 @@
                 if (!result.isConfirmed) {
                     $.ajax({
                         type: 'GET',
-                        url: 'kelas/delete/' + id,
+                        url: 'delete/' + id,
                         contentType: false,
                         processData: false,
                         success: function(data) {
                             if(data.delete == 'success') {
                                 Swal.fire('Deleted!', '', 'success')
-                                location.reload();
+                                deleteSensor(id)
+                                setTimeout(reload, 3000);
                             }
                         }
                     });
@@ -179,15 +234,4 @@
     });
      
 </script>
-@if (session('store'))
-    <script type="text/javascript">
-		Swal.fire({
-			icon: 'success',
-			title: 'Success',
-			text: 'Berhasil tambah data!',
-            showConfirmButton: false,
-            timer: 1200
-			})
-    </script>
-@endif
 @endsection

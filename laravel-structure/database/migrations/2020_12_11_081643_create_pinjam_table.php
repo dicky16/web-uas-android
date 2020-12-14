@@ -21,6 +21,8 @@ class CreatePinjamTable extends Migration
             $table->enum('status', ['pending', 'ditolak', 'diterima']);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('kelas_id');
+            $table->foreign('kelas_id')->references('id')->on('room')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ Coded by www.creative-tim.com
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('admin/img/apple-icon.png') }}">
   <link rel="icon" type="image/png" href="{{ asset('admin/img/favicon.png') }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>
     Paper Dashboard 2 by Creative Tim
   </title>
@@ -39,6 +40,33 @@ Coded by www.creative-tim.com
 </head>
 
 <body class="">
+  <!-- firebase -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyBtmZSiGX2P28UHlKr7L_LNM4HtxOMuaFg",
+    authDomain: "uas-android-1c142.firebaseapp.com",
+    databaseURL: "https://uas-android-1c142.firebaseio.com",
+    projectId: "uas-android-1c142",
+    storageBucket: "uas-android-1c142.appspot.com",
+    messagingSenderId: "194568149241",
+    appId: "1:194568149241:web:033adc9798278f3fa12a28",
+    measurementId: "G-9BVBC5736T"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
       <div class="logo">
